@@ -1,49 +1,58 @@
 ﻿using System.Text;
-namespace Hunter_game
+namespace Bibliotec
 {
     internal class Program
     {
-        
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.InputEncoding = System.Text.Encoding.UTF8;
-            Hunter hunter = new Hunter();
-            while (true) { 
-            Console.WriteLine("---------Меню---------");
-            Console.WriteLine("1. Статистика ");
-            Console.WriteLine("2. Піти до магазину ");
-            Console.WriteLine("3. Піти на полювання ");
-            Console.WriteLine("4. Завершити гру ");
-            string choice = Console.ReadLine();
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
+            Library library = new Library();
+
             
-           
+            library.AddBook(new Book("Заповіт", "Тарас Шевченко", 1));
+            library.AddBook(new Book("І не лишилось жодного", "Агата Крісті", 2));
+            library.AddBook(new Book("1984", "Джордж Орвелл", 3));
+            library.AddBook(new Book("451 градусів по Фаренгейту", "Джейн Остін", 4));
+            library.AddBook(new Book("Пірати Карибського Моря", "Роберт Лістон", 5));
 
-          
-                switch (choice)
-                {
-                case "1":
-                    hunter.ShowStats();
-                    break;
+        
+            library.AddReader(new Reader("Джейсон", 1));
+            library.AddReader(new Reader("Боб", 2));
+            library.AddReader(new Reader("Чарлі", 3));
 
-                case "2":
-                    hunter.VisitShop();
+            Console.WriteLine("=== Вільні книги ===");
+            library.AvailableBooks();
 
-                    break;
+            Console.WriteLine();
 
-                case "3":
-                    hunter.HuntRabbit();
-                    break;
+            Console.WriteLine("=== Орендована книга ===");
+            library.BorrowBook(1, 1);
 
-                case "4":
-                    Console.WriteLine("Гру завершено.");
-                    break;
+            Console.WriteLine();
 
-                default:
-                    Console.WriteLine("Невірний вибір.");
-                    break;
-                }
-                            }
+            Console.WriteLine("=== Спроба оренди тієї ж книги знову ===");
+            library.BorrowBook(2, 1);
+
+            Console.WriteLine();
+
+            Console.WriteLine("=== Інформація про бібліотеку ===");
+            library.info();
+
+            Console.WriteLine();
+
+            Console.WriteLine("=== Повернення книги ===");
+            library.ReturnBook(1, 1);
+
+            Console.WriteLine();
+
+            Console.WriteLine("=== Доступні книги після повернення ===");
+            library.AvailableBooks();
+
+            Console.WriteLine();
+
+            Console.WriteLine("=== Повна інформація про бібліотеку ===");
+            library.info();
         }
     }
 }
